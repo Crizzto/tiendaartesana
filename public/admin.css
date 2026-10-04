@@ -1,0 +1,18 @@
+.admin{padding:2rem 1.25rem 5rem}
+.tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.tab{border:1px solid var(--border);background:var(--card);border-radius:99px;padding:.5rem 1.1rem;cursor:pointer;font:inherit}
+.tab.on{background:var(--primary);color:var(--pfg);border-color:var(--primary);font-weight:600}
+.panel{display:none}.panel.on{display:block}
+.admin-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.75rem;background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1.25rem;margin-bottom:1.5rem}
+.admin-form label{display:block;font-size:.8rem;font-weight:600}
+.admin-form input,.admin-form textarea{width:100%;margin-top:.3rem;border:1px solid var(--border);border-radius:.5rem;padding:.5rem;font:inherit}
+.full{grid-column:1/-1}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:1rem;overflow:hidden}
+th,td{text-align:left;padding:.6rem .75rem;border-bottom:1px solid var(--border);font-size:.9rem;vertical-align:top}
+th{background:var(--secondary)}
+tr:last-child td{border-bottom:0}
+select,.rowbtn{font:inherit;border:1px solid var(--border);border-radius:.4rem;padding:.3rem .5rem;background:#fff;cursor:pointer}
+.stars-sm{color:var(--accent)}
+.tag{font-size:.72rem;padding:.15rem .5rem;border-radius:99px;background:var(--secondary)}
+.tag.ok{background:oklch(.9 .07 165);color:oklch(.3 .09 165)}
+details{margin-top:.4rem}

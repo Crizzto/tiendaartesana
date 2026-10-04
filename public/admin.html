@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel — Ko'olel</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Karla:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+</head><body>
+<header><div class="wrap"><a class="logo" href="/"><b>K</b><div><span>Panel Ko'olel</span><small>Administración</small></div></a></div></header>
+<div class="wrap admin">
+  <nav class="tabs">
+    <button class="tab on" data-t="pedidos">Pedidos</button>
+    <button class="tab" data-t="productos">Productos</button>
+    <button class="tab" data-t="envios">Envíos</button>
+    <button class="tab" data-t="opiniones">Opiniones</button>
+  </nav>
+
+  <section id="pedidos" class="panel on"><h2>Pedidos</h2><div id="orders"></div></section>
+
+  <section id="productos" class="panel">
+    <h2>Productos</h2>
+    <form id="p-form" class="admin-form">
+      <input type="hidden" name="edit-id">
+      <label>ID (único, sin espacios)<input name="id" required></label>
+      <label>Nombre<input name="name" required></label>
+      <label>Categoría<input name="category"></label>
+      <label>Precio (MXN)<input name="price" type="number" step="0.01" min="0" required></label>
+      <label>Stock<input name="stock" type="number" min="0" required></label>
+      <label>Origen<input name="origin"></label>
+      <label>Temporada (opcional)<input name="season" placeholder="Ej. Navidad, Verano — vacío = todo el año"></label>
+      <label class="full">Descripción<textarea name="description" rows="2"></textarea></label>
+      <label class="full">URL de imagen<input name="image"></label>
+      <label class="full"><input type="checkbox" name="customizable" style="width:auto;display:inline-block;margin-right:.4rem"> ¿Se puede personalizar el color?</label>
+      <label class="full">Colores disponibles (uno por línea: <code>Nombre | #colorHex</code>)
+        <textarea name="color_options" rows="3" placeholder="Natural | #c98a5a&#10;Café oscuro | #6b4226&#10;Negro | #2b2b2b"></textarea>
+      </label>
+      <label class="full">Fotos reales de ejemplo (uno por línea: <code>URL | Descripción</code>)
+        <textarea name="example_gallery" rows="3" placeholder="https://.../foto1.jpg | Ejemplo en café oscuro"></textarea>
+      </label>
+      <div class="full"><button class="btn sm" type="submit">Guardar producto</button> <button class="btn sm ghost" type="button" id="p-cancel">Cancelar edición</button></div>
+    </form>
+    <div id="products"></div>
+  </section>
+
+  <section id="envios" class="panel">
+    <h2>Métodos de envío</h2>
+    <form id="s-form" class="admin-form">
+      <label>ID<input name="id" required></label>
+      <label>Nombre<input name="name" required></label>
+      <label>Detalle<input name="detail"></label>
+      <label>Costo (MXN)<input name="cost" type="number" step="0.01" min="0" required></label>
+      <div class="full"><button class="btn sm" type="submit">Guardar envío</button></div>
+    </form>
+    <div id="shipping"></div>
+  </section>
+
+  <section id="opiniones" class="panel"><h2>Opiniones de clientes</h2><div id="reviews"></div></section>
+</div>
+<script src="admin.js"></script>
+</body></html>

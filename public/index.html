@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ko'olel — Artesanías de Yucatán: lámparas y bolsas tejidas</title>
+<meta name="description" content="Lámparas de henequén y bolsas tejidas a mano por artesanas de Yucatán. Compra en línea con envío a todo México.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="#inicio"><b>K</b><div><span>Ko'olel</span><small>Artesanías de Yucatán</small></div></a>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <nav><a href="#tienda">Tienda</a><a href="#historia">Historia</a><a href="#opiniones">Opiniones</a><a href="#entrega">Entrega</a></nav>
+    <button class="btn sm" id="open-cart">Carrito <span id="cart-count">0</span></button>
+  </div>
+</div></header>
+
+<section id="inicio" class="hero"><div class="wrap">
+  <p class="k">Hecho a mano en la península</p>
+  <h1>Lámparas y bolsas tejidas por manos yucatecas</h1>
+  <p class="d">Cada pieza es única: fibra de henequén, palma y sisal trabajadas por familias artesanas de Yucatán. Envíos a todo México.</p>
+  <div class="btns"><a href="#tienda" class="btn">Ver piezas</a><a href="#historia" class="btn ghost">Nuestra historia</a></div>
+</div></section>
+
+<section id="tienda"><div class="wrap">
+  <h2>Nuestras piezas</h2>
+  <p class="muted">Precios en pesos mexicanos. Piezas limitadas por temporada.</p>
+  <div class="filters" id="filters"></div>
+  <div class="filters" id="season-filters" hidden></div>
+  <div class="grid" id="catalog"></div>
+</div></section>
+
+<section id="historia" class="band"><div class="wrap three">
+  <div><h3>Fibras de la región</h3><p>Henequén, palma y sisal cultivados y teñidos en la península con procesos naturales.</p></div>
+  <div><h3>Comercio justo</h3><p>Pagamos el precio que la artesana define por su trabajo, sin intermediarios.</p></div>
+  <div><h3>Piezas únicas</h3><p>Ningún tejido es idéntico: pequeñas variaciones son la firma de cada mano.</p></div>
+</div></section>
+
+<!-- OPINIONES DE EJEMPLO: reemplázalas por opiniones reales de tus clientes o borra esta sección -->
+<section id="opiniones"><div class="wrap">
+  <h2>Lo que dicen nuestras clientas</h2>
+  <div class="grid" id="reviews-grid" style="margin-top:2rem"></div>
+  <details style="margin-top:2rem"><summary style="cursor:pointer;font-weight:600">Dejar tu opinión</summary>
+    <form id="review-form" class="card" style="padding:1.5rem;display:grid;gap:1rem;grid-template-columns:1fr 1fr;margin-top:1rem">
+      <label class="f"><span>Tu nombre *</span><input type="text" name="name" required></label>
+      <label class="f"><span>Ciudad</span><input type="text" name="location"></label>
+      <label class="f full"><span>Pieza que compraste</span><input type="text" name="product"></label>
+      <label class="f"><span>Calificación *</span><select name="rating" required style="width:100%;border:1px solid var(--border);border-radius:var(--r);padding:.65rem .9rem"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select></label>
+      <label class="f full"><span>Tu opinión *</span><textarea name="comment" rows="3" required></textarea></label>
+      <div class="full"><button class="btn sm" type="submit">Enviar opinión</button></div>
+      <p id="review-msg" class="muted full"></p>
+    </form>
+  </details>
+</div></section>
+
+<section id="entrega" style="padding-top:0"><div class="wrap">
+  <h2>Dirección de entrega</h2>
+  <p class="muted">Indica dónde quieres recibir tus piezas. Las lámparas se empacan en caja rígida con protección extra.</p>
+  <div class="two">
+    <form class="card" id="addr-form">
+      <label class="f"><span>Nombre de quien recibe *</span><input type="text" name="nombre" placeholder="María Canul" required></label>
+      <label class="f"><span>Teléfono *</span><input type="tel" name="telefono" placeholder="999 123 4567" required></label>
+      <label class="f full"><span>Correo para tu confirmación *</span><input type="email" name="email" placeholder="tucorreo@ejemplo.com" required></label>
+      <label class="f full"><span>Calle y número *</span><input type="text" name="calle" placeholder="Calle 60 #345 x 45 y 47" required></label>
+      <label class="f"><span>Colonia</span><input type="text" name="colonia" placeholder="Centro"></label>
+      <label class="f"><span>Ciudad *</span><input type="text" name="ciudad" placeholder="Mérida" required></label>
+      <label class="f"><span>Estado *</span><input type="text" name="estado" value="Yucatán" required></label>
+      <label class="f"><span>Código postal *</span><input type="text" name="cp" placeholder="97000" inputmode="numeric" pattern="[0-9]{5}" required></label>
+      <label class="f full"><span>Referencias para el repartidor</span><textarea name="referencias" rows="3" placeholder="Portón de madera, entre farmacia y panadería"></textarea></label>
+      <p class="muted full" style="margin:-.3rem 0 0">Al continuar aceptas nuestro <a href="privacidad.html" target="_blank">aviso de privacidad</a> y nuestra política de <a href="envios-devoluciones.html" target="_blank">envíos y devoluciones</a>.</p>
+      <div class="full"><button class="btn" type="submit">Guardar y revisar pedido</button></div>
+    </form>
+    <div class="card ship"><h3>Método de envío</h3><div id="ship-options"></div></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div><b>Ko'olel · Artesanías de Yucatán</b><p style="margin-top:.5rem">Mérida, Yucatán · hola@koolel.mx · Envíos a todo México</p><p style="margin-top:.6rem"><a href="envios-devoluciones.html">Envíos y devoluciones</a> · <a href="privacidad.html">Aviso de privacidad</a></p></div>
+  <div class="soc"><b>Síguenos</b><p style="margin-top:.75rem"><a href="https://instagram.com/koolel.mx" target="_blank" rel="noreferrer">Instagram</a><a href="https://facebook.com/koolel.mx" target="_blank" rel="noreferrer">Facebook</a><a id="wa-footer" href="#" target="_blank" rel="noreferrer">WhatsApp</a></p></div>
+</div></footer>
+
+<a id="wa-float" class="wa" href="#" target="_blank" rel="noreferrer" aria-label="Escríbenos por WhatsApp">WhatsApp</a>
+<div id="customize-modal" class="modal">
+  <div class="modal-box">
+    <div class="dh"><h2 id="cz-title" style="font-size:1.2rem"></h2><button id="cz-close">Cerrar</button></div>
+    <div class="cz-body">
+      <div class="cz-preview"><img id="cz-img" alt=""><div id="cz-tint" class="cz-tint"></div></div>
+      <div class="cz-controls">
+        <p class="muted">Vista simulada del color — es una referencia, no una foto real de tu pieza.</p>
+        <div id="cz-swatches" class="swatches"></div>
+        <p><b>Color elegido:</b> <span id="cz-color-label"></span></p>
+        <button class="btn sm" id="cz-add">Agregar al carrito</button>
+        <h3 style="margin-top:1.5rem;font-size:1rem">Fotos reales de ejemplo</h3>
+        <div id="cz-gallery" class="cz-gallery"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="veil"></div>
+<aside id="drawer" aria-label="Carrito">
+  <div class="dh"><h2 style="font-size:1.3rem">Tu carrito</h2><button id="close-cart">Cerrar</button></div>
+  <div id="items"></div>
+  <div class="df">
+    <dl>
+      <div><dt class="muted">Subtotal</dt><dd id="t-sub"></dd></div>
+      <div><dt class="muted">Envío</dt><dd id="t-ship"></dd></div>
+      <div class="tot"><dt>Total</dt><dd id="t-total"></dd></div>
+    </dl>
+    <p id="msg"></p>
+    <div id="paypal-btn"></div>
+    <a id="wa-order" class="btn wa-btn" href="#" target="_blank" rel="noreferrer">Pedir por WhatsApp</a>
+  </div>
+</aside>
+<script src="script.js"></script>
+</body>
+</html>
