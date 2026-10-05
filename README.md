@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ko'olel — Tienda de artesanías (Node + Postgres + PayPal)
 
 ## Qué hay ahora
@@ -63,3 +64,7 @@ Por eso construí una combinación de dos cosas:
 
 ## Local
 `npm install` → copia `.env.example` a `.env` y llénalo (incluyendo `DATABASE_URL` de Neon) → `npm start` → http://localhost:3000
+=======
+# tiendaartesaniasjeje
+Una tienda de artesanias
+>>>>>>> f72d675cdb20b5f35d5bb840ea06a426b6f4fab1
