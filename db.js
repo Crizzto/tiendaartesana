@@ -2,7 +2,9 @@ import "dotenv/config";
 import pg from "pg";
 const { Pool } = pg;
 
-// Neon (y la mayoría de proveedores gratuitos) exige conexión SSL.
+
+pg.types.setTypeParser(1700, (v) => parseFloat(v));
+
 export const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: process.env.DATABASE_URL?.includes("localhost") ? false : { rejectUnauthorized: false },
@@ -95,9 +97,7 @@ export async function initSchema() {
     for (const r of seedReviews) await q("INSERT INTO reviews (name,location,product,rating,comment,approved) VALUES ($1,$2,$3,$4,$5,TRUE)", r);
   }
 
-  // Si tu base ya existía de antes (Neon ya tenía tus 5 productos), aquí se agregan
-  // ejemplos de temporada y personalización SOLO en los campos que sigan vacíos,
-  // para no pisar nada que ya hayas editado desde el panel.
+ 
   await q(`UPDATE products SET season = 'Navidad' WHERE id = 'bolsa-bordada' AND season IS NULL`);
   await q(`UPDATE products SET season = 'Verano' WHERE id = 'lampara-mesa' AND season IS NULL`);
   await q(
