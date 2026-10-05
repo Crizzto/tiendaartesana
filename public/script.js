@@ -2,7 +2,7 @@
 const WHATSAPP = "529991234567";
 
 const $ = (s) => document.querySelector(s);
-const money = (n) => n.toLocaleString("es-MX", { style: "currency", currency: "MXN", maximumFractionDigits: 0 });
+const money = (n) => Number(n).toLocaleString("es-MX", { style: "currency", currency: "MXN", maximumFractionDigits: 0 });
 const load = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
 
 let products = [], shipping = [], catFilter = "Todo", seasonFilter = "Todo";
@@ -17,7 +17,7 @@ const baseIdOf = (key) => key.split("::")[0];
 const colorOf = (key) => (key.includes("::") ? decodeURIComponent(key.split("::")[1]) : null);
 
 const requiredOk = () => address && ["nombre", "telefono", "email", "calle", "ciudad", "estado"].every((k) => address[k]?.trim()) && /^\S+@\S+\.\S+$/.test(address.email) && /^\d{5}$/.test(address.cp || "");
-const shipCost = () => (shipping.find((s) => s.id === shipId)?.cost ?? 0);
+const shipCost = () => Number(shipping.find((s) => s.id === shipId)?.cost ?? 0);
 const lines = () => Object.entries(cart).map(([key, qty]) => ({ key, p: products.find((p) => p.id === baseIdOf(key)), color: colorOf(key), qty })).filter((l) => l.p);
 // Máximo por producto (comparte stock entre todos sus colores; una pieza artesanal es la misma sin importar el tinte elegido)
 const maxQty = (p) => (Number.isFinite(p.stock) ? Math.max(0, p.stock) : 20);
