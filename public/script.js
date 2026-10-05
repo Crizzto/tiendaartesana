@@ -1,5 +1,5 @@
 // Tu número de WhatsApp: 52 + 10 dígitos, sin "+" ni espacios (ej. 529991234567)
-const WHATSAPP = "529991234567";
+const WHATSAPP = "529852578864";
 
 const $ = (s) => document.querySelector(s);
 const money = (n) => Number(n).toLocaleString("es-MX", { style: "currency", currency: "MXN", maximumFractionDigits: 0 });
