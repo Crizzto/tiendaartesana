@@ -1,0 +1,52 @@
+[
+  {
+    "id": "lampara-henequen",
+    "name": "Lámpara colgante Henequén",
+    "category": "Lámparas",
+    "price": 1890,
+    "origin": "Tejida en Muna, Yucatán",
+    "description": "Pantalla grande tejida en fibra de henequén, luz cálida y filtrada.",
+    "image": "https://placehold.co/800x800/c98a5a/fff5e6?text=Lampara+Henequen",
+    "stock": 3
+  },
+  {
+    "id": "lampara-mesa",
+    "name": "Lámpara de mesa Sisal",
+    "category": "Lámparas",
+    "price": 1250,
+    "origin": "Tejida en Ticul, Yucatán",
+    "description": "Base de madera de tzalam con pantalla cilíndrica de fibra natural.",
+    "image": "https://placehold.co/800x800/d9b78a/4a2e1c?text=Lampara+Sisal",
+    "stock": 2
+  },
+  {
+    "id": "bolsa-bordada",
+    "name": "Bolsa bordada Flores",
+    "category": "Bolsas",
+    "price": 980,
+    "origin": "Bordada en Tekit, Yucatán",
+    "description": "Palma tejida con bordado floral a mano y asas de piel.",
+    "image": "https://placehold.co/800x800/e8c5b0/7a3b22?text=Bolsa+Bordada",
+    "stock": 5
+  },
+  {
+    "id": "bolsa-palma",
+    "name": "Canasta de palma Xibalbá",
+    "category": "Bolsas",
+    "price": 640,
+    "origin": "Tejida en Halachó, Yucatán",
+    "description": "Tejido de palma con grecas mayas en tinte natural negro.",
+    "image": "https://placehold.co/800x800/b8c9b0/2b4a3a?text=Canasta+Palma",
+    "stock": 4
+  },
+  {
+    "id": "bolsa-cruzada",
+    "name": "Bolsa cruzada Sac Nicté",
+    "category": "Bolsas",
+    "price": 760,
+    "origin": "Tejida en Maxcanú, Yucatán",
+    "description": "Sisal tejido con greca bordada en rojo y negro, correa ajustable.",
+    "image": "https://placehold.co/800x800/e0d0b0/8a2b22?text=Bolsa+Cruzada",
+    "stock": 6
+  }
+]

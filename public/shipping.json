@@ -1,0 +1,5 @@
+[
+  {"id":"estandar","name":"Estándar nacional","detail":"3 a 6 días hábiles","cost":149},
+  {"id":"express","name":"Express nacional","detail":"1 a 2 días hábiles","cost":299},
+  {"id":"local","name":"Entrega local en Mérida","detail":"24 h, sin costo","cost":0}
+]

@@ -33,26 +33,16 @@ async function loadProducts() {
   const products = await api("/api/products");
   $("#products").innerHTML = `<table><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th><th></th></tr>${products.map((p) => `
     <tr>
-      <td><b>${p.name}</b><br><small>${p.id}</small>${p.season ? `<br><span class="tag">${p.season}</span>` : ""}${p.customizable ? ` <span class="tag ok">Personalizable</span>` : ""}</td><td>${p.category || ""}</td><td>${mxn(p.price)}</td>
+      <td><b>${p.name}</b><br><small>${p.id}</small></td><td>${p.category || ""}</td><td>${mxn(p.price)}</td>
       <td>${p.stock}${p.stock === 0 ? ' <span class="tag">Agotado</span>' : p.stock <= 3 ? ' <span class="tag">Bajo</span>' : ""}</td>
       <td><button class="rowbtn" data-edit='${JSON.stringify(p).replace(/'/g, "&#39;")}'>Editar</button> <button class="rowbtn" data-del="${p.id}">Eliminar</button></td>
     </tr>`).join("")}</table>`;
   $$("#products [data-edit]").forEach((b) => b.onclick = () => fillProductForm(JSON.parse(b.dataset.edit)));
   $$("#products [data-del]").forEach((b) => b.onclick = async () => { if (confirm("¿Eliminar este producto?")) { await api(`/api/admin/products/${b.dataset.del}`, { method: "DELETE" }); loadProducts(); } });
 }
-// "Natural | #c98a5a" por línea <-> [{label:"Natural",hex:"#c98a5a"}]
-const colorsToText = (arr) => (arr || []).map((c) => `${c.label} | ${c.hex}`).join("\n");
-const textToColors = (txt) => txt.split("\n").map((l) => l.trim()).filter(Boolean).map((l) => { const [label, hex] = l.split("|").map((s) => s.trim()); return { label, hex }; }).filter((c) => c.label && c.hex);
-// "https://... | Descripción" por línea <-> [{url,caption}]
-const galleryToText = (arr) => (arr || []).map((g) => `${g.url} | ${g.caption || ""}`).join("\n");
-const textToGallery = (txt) => txt.split("\n").map((l) => l.trim()).filter(Boolean).map((l) => { const [url, ...rest] = l.split("|"); return { url: url.trim(), caption: rest.join("|").trim() }; }).filter((g) => g.url);
-
 function fillProductForm(p) {
   const f = $("#p-form");
-  for (const k of ["id", "name", "category", "price", "stock", "origin", "description", "image", "season"]) f[k].value = p[k] ?? "";
-  f.customizable.checked = !!p.customizable;
-  f.color_options.value = colorsToText(p.color_options);
-  f.example_gallery.value = galleryToText(p.example_gallery);
+  for (const k of ["id", "name", "category", "price", "stock", "origin", "description", "image"]) f[k].value = p[k] ?? "";
   f.id.disabled = true;
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -60,11 +50,7 @@ $("#p-cancel").onclick = () => { $("#p-form").reset(); $("#p-form").id.disabled 
 $("#p-form").onsubmit = async (e) => {
   e.preventDefault();
   const f = new FormData(e.target);
-  const body = {
-    id: f.get("id"), name: f.get("name"), category: f.get("category"), price: Number(f.get("price")), stock: Number(f.get("stock")),
-    origin: f.get("origin"), description: f.get("description"), image: f.get("image"), season: f.get("season") || null,
-    customizable: f.get("customizable") === "on", color_options: textToColors(f.get("color_options") || ""), example_gallery: textToGallery(f.get("example_gallery") || ""),
-  };
+  const body = { id: f.get("id"), name: f.get("name"), category: f.get("category"), price: Number(f.get("price")), stock: Number(f.get("stock")), origin: f.get("origin"), description: f.get("description"), image: f.get("image") };
   try { await api("/api/admin/products", { method: "POST", body: JSON.stringify(body) }); e.target.reset(); e.target.id.disabled = false; loadProducts(); }
   catch (err) { alert(err.message); }
 };

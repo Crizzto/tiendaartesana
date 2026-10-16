@@ -89,16 +89,13 @@ app.post("/api/paypal/create-order", async (req, res) => {
     if (!ship) throw new Error("Método de envío inválido");
 
     const orderItems = [];
-    const ppItems = items.map(({ id, quantity, color }) => {
+    const ppItems = items.map(({ id, quantity }) => {
       const p = products.find((x) => x.id === id);
       const qty = Math.floor(Number(quantity));
       if (!p || !(qty > 0 && qty <= 20)) throw new Error("Producto inválido");
       if (qty > p.stock) throw new Error(p.stock > 0 ? `Solo quedan ${p.stock} de "${p.name}".` : `"${p.name}" está agotado.`);
-      // El color solo se acepta si de verdad es una de las opciones configuradas para ese producto (nadie puede inventarse uno).
-      const colorLabel = p.customizable && color ? (p.color_options || []).find((c) => c.label === color)?.label : null;
-      const displayName = colorLabel ? `${p.name} (${colorLabel})` : p.name;
-      orderItems.push({ id: p.id, name: displayName, quantity: qty, price: Number(p.price), color: colorLabel });
-      return { name: displayName.slice(0, 127), quantity: String(qty), unit_amount: { currency_code: "MXN", value: Number(p.price).toFixed(2) } };
+      orderItems.push({ id: p.id, name: p.name, quantity: qty, price: Number(p.price) });
+      return { name: p.name.slice(0, 127), quantity: String(qty), unit_amount: { currency_code: "MXN", value: Number(p.price).toFixed(2) } };
     });
     const itemTotal = ppItems.reduce((s, i) => s + Number(i.unit_amount.value) * Number(i.quantity), 0);
     const shipCost = Number(ship.cost);
@@ -222,13 +219,11 @@ app.patch("/api/admin/orders/:id", async (req, res) => {
 app.get("/api/admin/products", async (req, res) => res.json((await q("SELECT * FROM products ORDER BY category, name")).rows));
 app.post("/api/admin/products", async (req, res) => {
   try {
-    const { id, name, category, price, origin, description, image, stock, season, customizable, color_options, example_gallery } = req.body;
+    const { id, name, category, price, origin, description, image, stock } = req.body;
     if (!id?.trim() || !name?.trim() || !(price >= 0)) throw new Error("Faltan datos del producto.");
-    await q(`INSERT INTO products (id,name,category,price,origin,description,image,stock,season,customizable,color_options,example_gallery)
-              VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
-              ON CONFLICT (id) DO UPDATE SET name=$2,category=$3,price=$4,origin=$5,description=$6,image=$7,stock=$8,season=$9,customizable=$10,color_options=$11,example_gallery=$12`,
-      [id.trim(), name, category || "", price, origin || "", description || "", image || "", Math.max(0, Math.floor(stock || 0)),
-       season?.trim() || null, !!customizable, JSON.stringify(color_options || []), JSON.stringify(example_gallery || [])]);
+    await q(`INSERT INTO products (id,name,category,price,origin,description,image,stock) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+              ON CONFLICT (id) DO UPDATE SET name=$2,category=$3,price=$4,origin=$5,description=$6,image=$7,stock=$8`,
+      [id.trim(), name, category || "", price, origin || "", description || "", image || "", Math.max(0, Math.floor(stock || 0))]);
     res.json({ ok: true });
   } catch (err) { res.status(400).json({ error: err.message }); }
 });
